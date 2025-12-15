@@ -9,7 +9,7 @@ function App() {
   const [productos, setProductos] = useState([])
 
   useEffect(() => {
-    fetch('/data/products.json')
+    fetch(`${import.meta.env.BASE_URL}data/products.json`)
       .then(response => response.json())
       .then(data => setProductos(data))
       .catch(error => console.error('Error cargando productos:', error))
