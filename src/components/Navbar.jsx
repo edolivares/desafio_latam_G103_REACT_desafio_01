@@ -1,4 +1,5 @@
 import { Container, Navbar, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { FaPizzaSlice, FaShoppingCart, FaHome, FaUnlock, FaLock, FaUser, FaSignOutAlt } from 'react-icons/fa'
 
 function NavbarComponent() {
@@ -8,21 +9,21 @@ function NavbarComponent() {
   return (
     <Navbar variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand as={Link} to="/">
           <FaPizzaSlice className="me-2" />
           Pizzería Mamma Mía
         </Navbar.Brand>
-        <Button variant="outline-light" href="/" className="me-2">
+        <Button variant="outline-light" as={Link} to="/" className="me-2">
           <FaHome className="me-2" />
           Home
         </Button>
         {!token ? (
           <>
-            <Button variant="outline-light" className="me-2">
+            <Button variant="outline-light" as={Link} to="/login" className="me-2">
               <FaUnlock className="me-2" />
               Login
             </Button>
-            <Button variant="outline-light" className="me-2">
+            <Button variant="outline-light" as={Link} to="/register" className="me-2">
               <FaLock className="me-2" />
               Register
             </Button>

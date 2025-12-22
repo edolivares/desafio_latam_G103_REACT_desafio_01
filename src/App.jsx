@@ -1,38 +1,41 @@
-import { useState, useEffect } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 import '@css/main.css'
 import Header from '@components/Header'
 import Footer from '@components/Footer'
-import CardPizza from '@components/CardPizza'
+import Home from '@pages/Home'
+import Login from '@pages/Login'
+import Register from '@pages/Register'
 
 function App() {
-  const [productos, setProductos] = useState([])
-
-  useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}data/products.json`)
-      .then(response => response.json())
-      .then(data => setProductos(data))
-      .catch(error => console.error('Error cargando productos:', error))
-  }, [])
-
   return (
-    <div className="app-container">
-      <Header />
-      
-      <main className="main-content mb-5">
-        <Container className="mt-5">
-          <Row className="g-4">
-            {productos.map((producto) => (
-              <Col key={producto.id} xs={12} md={6} lg={4}>
-                <CardPizza producto={producto} />
-              </Col>
-            ))}
-          </Row>
-        </Container>
-      </main>
-      
-      <Footer />
-    </div>
+    <Router basename={import.meta.env.BASE_URL}>
+      <div className="app-container">
+        <Header />
+        
+        <div className="main-content-wrapper">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </div>
+        
+        <Footer />
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+      </div>
+    </Router>
   )
 }
 
