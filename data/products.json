@@ -2,42 +2,54 @@
   {
     "id": 1,
     "name": "Pizza Napolitana",
-    "ingredients": ["mozzarella", "tomatoes", "ham", "oregano"],
+    "slug": "pizza-napolitana",
+    "description": "La pizza napolitana, de masa tierna y delgada pero bordes altos, es la versión propia de la cocina napolitana de la pizza redonda.",
+    "ingredients": ["mozzarella", "tomates", "jamón", "orégano"],
     "price": 5950,
     "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500&h=300&fit=crop"
   },
   {
     "id": 2,
     "name": "Pizza Española",
-    "ingredients": ["mozzarella", "gorgonzola", "parmesan", "provolone"],
+    "slug": "pizza-espanola",
+    "description": "Una deliciosa combinación de quesos premium que incluye gorgonzola, parmesano y provolone, creando un sabor intenso y cremoso.",
+    "ingredients": ["mozzarella", "gorgonzola", "parmesano", "provolone"],
     "price": 6950,
     "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=300&fit=crop"
   },
   {
     "id": 3,
     "name": "Pizza Pepperoni",
-    "ingredients": ["mozzarella", "pepperoni", "oregano"],
+    "slug": "pizza-pepperoni",
+    "description": "La clásica pizza con pepperoni, un favorito tradicional con un sabor picante y delicioso que nunca pasa de moda.",
+    "ingredients": ["mozzarella", "pepperoni", "orégano"],
     "price": 6950,
     "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=500&h=300&fit=crop"
   },
   {
     "id": 4,
     "name": "Pizza Margherita",
-    "ingredients": ["mozzarella", "tomato sauce", "basil", "olive oil"],
+    "slug": "pizza-margherita",
+    "description": "La pizza clásica italiana con tomate, mozzarella fresca, albahaca y aceite de oliva, representando los colores de la bandera italiana.",
+    "ingredients": ["mozzarella", "salsa de tomate", "albahaca", "aceite de oliva"],
     "price": 5500,
     "image": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=500&h=300&fit=crop"
   },
   {
     "id": 5,
-    "name": "Pizza Hawaiian",
-    "ingredients": ["mozzarella", "ham", "pineapple", "tomato sauce"],
+    "name": "Pizza Hawaiana",
+    "slug": "pizza-hawaiana",
+    "description": "Una combinación única y deliciosa de jamón y piña que crea un equilibrio perfecto entre lo salado y lo dulce.",
+    "ingredients": ["mozzarella", "jamón", "piña", "salsa de tomate"],
     "price": 6500,
     "image": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=500&h=300&fit=crop"
   },
   {
     "id": 6,
-    "name": "Pizza Vegetarian",
-    "ingredients": ["mozzarella", "mushrooms", "bell peppers", "olives", "onions"],
+    "name": "Pizza Vegetariana",
+    "slug": "pizza-vegetariana",
+    "description": "Una opción saludable y deliciosa con una variedad de vegetales frescos como champiñones, pimientos, aceitunas y cebollas.",
+    "ingredients": ["mozzarella", "champiñones", "pimientos", "aceitunas", "cebollas"],
     "price": 6300,
     "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=300&fit=crop"
   }
