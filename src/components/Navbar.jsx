@@ -1,9 +1,11 @@
 import { Container, Navbar, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { FaPizzaSlice, FaShoppingCart, FaHome, FaUnlock, FaLock, FaUser, FaSignOutAlt } from 'react-icons/fa'
+import { useCart } from '@contexts/CartContext'
 
 function NavbarComponent() {
-  const total = 25000
+  const { calculateTotal } = useCart()
+  const total = calculateTotal()
   const token = false
 
   return (
