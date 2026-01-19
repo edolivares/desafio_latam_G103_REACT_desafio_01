@@ -42,7 +42,7 @@ function NavbarComponent() {
             </Button>
           </>
         )}
-        <Button variant="outline-light" className="ms-auto">
+        <Button variant="outline-light" as={Link} to="/cart" className="ms-auto">
           <FaShoppingCart className="me-2" />
           Total: ${total.toLocaleString()}
         </Button>

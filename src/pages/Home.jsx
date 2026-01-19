@@ -4,13 +4,30 @@ import CardPizza from '@components/CardPizza'
 
 function Home() {
   const [productos, setProductos] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}data/products.json`)
+    fetch('https://simple-api-backend-nodejs-express-f.vercel.app/api/pizzas')
       .then(response => response.json())
-      .then(data => setProductos(data))
-      .catch(error => console.error('Error cargando productos:', error))
+      .then(data => {
+        setProductos(data)
+        setLoading(false)
+      })
+      .catch(error => {
+        console.error('Error cargando productos:', error)
+        setLoading(false)
+      })
   }, [])
+
+  if (loading) {
+    return (
+      <main className="main-content mb-5">
+        <Container className="mt-5">
+          <p className="text-center">Cargando pizzas...</p>
+        </Container>
+      </main>
+    )
+  }
 
   return (
     <main className="main-content mb-5">

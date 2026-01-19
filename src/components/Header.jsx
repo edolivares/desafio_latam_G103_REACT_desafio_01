@@ -7,12 +7,13 @@ function Header() {
   const location = useLocation()
   const pathname = location.pathname
   const pathSegments = pathname.split('/').filter(Boolean)
-  const isHome = pathname === '/' || (pathname.endsWith('/') && pathSegments.length <= 1)
+  //const isHome = pathname === '/' || (pathname.endsWith('/') && pathSegments.length <= 1)
   const isLogin = pathname.includes('/login')
   const isRegister = pathname.includes('/register')
   const isCart = pathname.includes('/cart')
+  const isPizza = pathname.includes('/pizza')
   
-  const showHero = !isHome && !isLogin && !isRegister && !isCart
+  const showHero = !isLogin && !isRegister && !isCart && !isPizza
 
   return (
     <header className="header">

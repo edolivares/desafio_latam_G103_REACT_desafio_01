@@ -1,7 +1,16 @@
 import { Card, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { FaEye, FaShoppingCart, FaCheese } from 'react-icons/fa'
+import { useCart } from '@contexts/CartContext'
+import { toast } from 'react-toastify'
 
 function CardPizza({ producto }) {
+  const { addToCart } = useCart()
+
+  const handleAddToCart = () => {
+    addToCart(producto)
+    toast.success(`${producto.name} añadida al carrito`)
+  }
   return (
     <Card className="h-100">
       <Card.Img variant="top" src={producto.image} />
@@ -20,11 +29,11 @@ function CardPizza({ producto }) {
           Precio: ${producto.price.toLocaleString()}
         </Card.Text>
         <div className="mt-auto d-flex gap-2">
-          <Button variant="outline-dark" className="flex-fill">
+          <Button variant="outline-dark" as={Link} to={`/pizza/${producto.slug}`} className="flex-fill">
             <FaEye className="me-2" />
             Ver Más
           </Button>
-          <Button variant="dark" className="flex-fill">
+          <Button variant="dark" className="flex-fill" onClick={handleAddToCart}>
             <FaShoppingCart className="me-2" />
             Añadir
           </Button>

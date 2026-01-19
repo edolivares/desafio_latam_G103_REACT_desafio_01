@@ -49,6 +49,31 @@ export const CartProvider = ({ children }) => {
     })
   }
 
+  const addToCart = (product) => {
+    setCart(prevCart => {
+      const existingItem = prevCart.find(item => item.productId === product.id)
+      
+      if (existingItem) {
+        return prevCart.map(item =>
+          item.productId === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      } else {
+        return [
+          ...prevCart,
+          {
+            productId: product.id,
+            quantity: 1,
+            price: product.price,
+            name: product.name,
+            image: product.image
+          }
+        ]
+      }
+    })
+  }
+
   const calculateTotal = () => {
     return cart.reduce((total, item) => total + (item.price * item.quantity), 0)
   }
@@ -57,6 +82,7 @@ export const CartProvider = ({ children }) => {
     cart,
     loading,
     updateQuantity,
+    addToCart,
     calculateTotal,
     setCart
   }
