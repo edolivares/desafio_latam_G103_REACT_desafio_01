@@ -4,14 +4,12 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/desafio_latam_G103_REACT_desafio_01/',
   plugins: [react()],
   resolve: {
     alias: {
       '@css': path.resolve(__dirname, './src/assets/css'),
       '@components': path.resolve(__dirname, './src/components'),
       '@pages': path.resolve(__dirname, './src/pages'),
-      '@contexts': path.resolve(__dirname, './src/contexts'),
     },
   },
 })

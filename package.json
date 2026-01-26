@@ -7,11 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "preview": "vite preview"
   },
-  "homepage": "https://edolivares.github.io/desafio_latam_G103_REACT_desafio_01/",
   "dependencies": {
     "bootstrap": "^5.3.8",
     "react": "^19.2.0",

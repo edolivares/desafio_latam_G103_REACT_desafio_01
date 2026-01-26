@@ -4,7 +4,7 @@ React + vite
 
 ## Demo
 
-[Ver Demo en Vivo](https://edolivares.github.io/desafio_latam_G103_REACT_desafio_01/)
+[Ver Demo en Vivo](https://desafio-latam-g103-react-desafio-01.vercel.app/)
 
 ## Notas Técnicas
 
