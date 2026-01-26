@@ -5,10 +5,12 @@ import Header from '@components/Header'
 import Footer from '@components/Footer'
 import { CartProvider } from '@contexts/CartContext'
 import Home from '@pages/Home'
-// import Login from '@pages/Login'
-// import Register from '@pages/Register'
+import Login from '@pages/Login'
+import Register from '@pages/Register'
 import Cart from '@pages/Cart'
 import PizzaInfo from '@pages/PizzaInfo'
+import Profile from '@pages/Profile'
+import NotFound from '@pages/NotFound'
 
 function App() {
   return (
@@ -20,10 +22,12 @@ function App() {
           <div className="main-content-wrapper">
             <Routes>
               <Route path="/" element={<Home />} />
-              {/* <Route path="/login" element={<Login />} /> */}
-              {/* <Route path="/register" element={<Register />} /> */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/pizza/:slug" element={<PizzaInfo />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
           

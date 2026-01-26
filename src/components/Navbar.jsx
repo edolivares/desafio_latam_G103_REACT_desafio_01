@@ -19,6 +19,10 @@ function NavbarComponent() {
           <FaHome className="me-2" />
           Home
         </Button>
+        <Button variant="outline-light" as={Link} to="/profile" className="me-2">
+          <FaUser className="me-2" />
+          Profile
+        </Button>
         {!token ? (
           <>
             <Button variant="outline-light" as={Link} to="/login" className="me-2">
@@ -32,7 +36,7 @@ function NavbarComponent() {
           </>
         ) : (
           <>
-            <Button variant="outline-light" className="me-2">
+            <Button variant="outline-light" as={Link} to="/profile" className="me-2">
               <FaUser className="me-2" />
               Profile
             </Button>

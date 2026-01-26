@@ -21,7 +21,7 @@ function Home() {
 
   if (loading) {
     return (
-      <main className="main-content mb-5">
+      <main className="main-content mb-5 justify-content-center">
         <Container className="mt-5">
           <p className="text-center">Cargando pizzas...</p>
         </Container>

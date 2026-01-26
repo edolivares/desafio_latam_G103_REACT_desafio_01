@@ -6,14 +6,7 @@ import NavbarComponent from '@components/Navbar'
 function Header() {
   const location = useLocation()
   const pathname = location.pathname
-  const pathSegments = pathname.split('/').filter(Boolean)
-  //const isHome = pathname === '/' || (pathname.endsWith('/') && pathSegments.length <= 1)
-  const isLogin = pathname.includes('/login')
-  const isRegister = pathname.includes('/register')
-  const isCart = pathname.includes('/cart')
-  const isPizza = pathname.includes('/pizza')
-  
-  const showHero = !isLogin && !isRegister && !isCart && !isPizza
+  const showHero = pathname === '/'
 
   return (
     <header className="header">
@@ -29,4 +22,3 @@ function Header() {
 }
 
 export default Header
-
