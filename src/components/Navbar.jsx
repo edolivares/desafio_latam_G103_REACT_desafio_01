@@ -2,11 +2,12 @@ import { Container, Navbar, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { FaPizzaSlice, FaShoppingCart, FaHome, FaUnlock, FaLock, FaUser, FaSignOutAlt } from 'react-icons/fa'
 import { useCart } from '@contexts/CartContext'
+import { useUser } from '@contexts/UserContext'
 
 function NavbarComponent() {
   const { calculateTotal } = useCart()
   const total = calculateTotal()
-  const token = false
+  const { token, logout } = useUser()
 
   return (
     <Navbar variant="dark" expand="lg">
@@ -19,11 +20,18 @@ function NavbarComponent() {
           <FaHome className="me-2" />
           Home
         </Button>
-        <Button variant="outline-light" as={Link} to="/profile" className="me-2">
-          <FaUser className="me-2" />
-          Profile
-        </Button>
-        {!token ? (
+        {token ? (
+          <>
+            <Button variant="outline-light" as={Link} to="/profile" className="me-2">
+              <FaUser className="me-2" />
+              Profile
+            </Button>
+            <Button variant="outline-light" className="me-2" onClick={logout}>
+              <FaSignOutAlt className="me-2" />
+              Logout
+            </Button>
+          </>
+        ) : (
           <>
             <Button variant="outline-light" as={Link} to="/login" className="me-2">
               <FaUnlock className="me-2" />
@@ -32,17 +40,6 @@ function NavbarComponent() {
             <Button variant="outline-light" as={Link} to="/register" className="me-2">
               <FaLock className="me-2" />
               Register
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button variant="outline-light" as={Link} to="/profile" className="me-2">
-              <FaUser className="me-2" />
-              Profile
-            </Button>
-            <Button variant="outline-light" className="me-2">
-              <FaSignOutAlt className="me-2" />
-              Logout
             </Button>
           </>
         )}

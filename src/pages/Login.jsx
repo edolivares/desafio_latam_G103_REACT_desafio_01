@@ -1,8 +1,12 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Container, Form, Button, Card, Row, Col } from 'react-bootstrap'
 import { toast } from 'react-toastify'
+import { useUser } from '@contexts/UserContext'
 
 function Login() {
+  const navigate = useNavigate()
+  const { login } = useUser()
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -48,11 +52,12 @@ function Login() {
     setErrors(newErrors)
 
     if (Object.keys(newErrors).length === 0) {
+      login()
       toast.success('Login exitoso!', {
         position: "top-right",
         autoClose: 3000,
       })
-      console.log('Datos del login:', formData)
+      navigate('/')
     }
   }
 

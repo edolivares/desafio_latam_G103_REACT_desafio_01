@@ -1,10 +1,13 @@
 import { Container, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import { useCart } from '@contexts/CartContext'
+import { useUser } from '@contexts/UserContext'
 import '@css/cart.css'
 
 function Cart() {
   const { cart, updateQuantity, calculateTotal, loading } = useCart()
+  const { token } = useUser()
 
   const getProductName = (name) => {
     return name.replace('Pizza ', '')
@@ -73,13 +76,22 @@ function Cart() {
             </div>
 
             <div className="d-grid">
-              <Button 
-                variant="dark" 
-                size="lg"
-                className="py-3"
-              >
-                Pagar
-              </Button>
+              {token ? (
+                <Button 
+                  variant="dark" 
+                  size="lg"
+                  className="py-3"
+                >
+                  Pagar
+                </Button>
+              ) : (
+                <div className="text-center p-3 border rounded bg-light">
+                  <p className="mb-2">Necesitas iniciar sesión para poder pagar.</p>
+                  <Button as={Link} to="/login" variant="primary">
+                    Ir a Iniciar sesión
+                  </Button>
+                </div>
+              )}
             </div>
           </>
         )}
