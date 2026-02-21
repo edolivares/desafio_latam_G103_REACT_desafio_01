@@ -1,13 +1,22 @@
 import { Container, Navbar, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { FaPizzaSlice, FaShoppingCart, FaHome, FaUnlock, FaLock, FaUser, FaSignOutAlt } from 'react-icons/fa'
 import { useCart } from '@contexts/CartContext'
 import { useUser } from '@contexts/UserContext'
 
+const PROTECTED_PATHS = ['/profile']
+
 function NavbarComponent() {
+  const navigate = useNavigate()
+  const location = useLocation()
   const { calculateTotal } = useCart()
   const total = calculateTotal()
-  const { token, logout } = useUser()
+  const { token, performLogout } = useUser()
+
+  const handleLogout = () => {
+    const isProtectedRoute = PROTECTED_PATHS.some(path => location.pathname === path || location.pathname.startsWith(path + '/'))
+    performLogout(isProtectedRoute ? navigate : null)
+  }
 
   return (
     <Navbar variant="dark" expand="lg">
@@ -26,7 +35,7 @@ function NavbarComponent() {
               <FaUser className="me-2" />
               Profile
             </Button>
-            <Button variant="outline-light" className="me-2" onClick={logout}>
+            <Button variant="outline-light" className="me-2" onClick={handleLogout}>
               <FaSignOutAlt className="me-2" />
               Logout
             </Button>

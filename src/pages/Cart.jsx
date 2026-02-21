@@ -1,16 +1,52 @@
+import { useState } from 'react'
 import { Container, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { FaMinus, FaPlus } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 import { useCart } from '@contexts/CartContext'
 import { useUser } from '@contexts/UserContext'
 import '@css/cart.css'
 
+const API_CHECKOUT_URL = 'https://simple-api-backend-nodejs-express-f.vercel.app/api/checkouts'
+
 function Cart() {
-  const { cart, updateQuantity, calculateTotal, loading } = useCart()
-  const { token } = useUser()
+  const { cart, updateQuantity, calculateTotal, loading, setCart } = useCart()
+  const { token, userToken, setOverlayMessage } = useUser()
+  const [checkoutLoading, setCheckoutLoading] = useState(false)
 
   const getProductName = (name) => {
     return name.replace('Pizza ', '')
+  }
+
+  const handleCheckout = async () => {
+    if (cart.length === 0 || !userToken) return
+    setCheckoutLoading(true)
+    setOverlayMessage('Procesando pedido...')
+    try {
+      const res = await fetch(API_CHECKOUT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userToken}`
+        },
+        body: JSON.stringify({ cart })
+      })
+      const data = await res.json()
+
+      if (!res.ok) {
+        toast.error(data?.error || data?.message || 'Error al procesar el pedido')
+        return
+      }
+
+      toast.success(data?.message || 'Pedido realizado correctamente')
+      setCart([])
+    } catch (err) {
+      console.error(err)
+      toast.error('Error de conexión. Intenta de nuevo.')
+    } finally {
+      setCheckoutLoading(false)
+      setOverlayMessage(null)
+    }
   }
 
   if (loading) {
@@ -81,8 +117,10 @@ function Cart() {
                   variant="dark" 
                   size="lg"
                   className="py-3"
+                  onClick={handleCheckout}
+                  disabled={checkoutLoading}
                 >
-                  Pagar
+                  {checkoutLoading ? 'Procesando...' : 'Pagar'}
                 </Button>
               ) : (
                 <div className="text-center p-3 border rounded bg-light">

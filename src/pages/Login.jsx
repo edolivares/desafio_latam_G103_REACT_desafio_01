@@ -4,14 +4,17 @@ import { Container, Form, Button, Card, Row, Col } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { useUser } from '@contexts/UserContext'
 
+const API_LOGIN_URL = 'https://simple-api-backend-nodejs-express-f.vercel.app/api/auth/login'
+
 function Login() {
   const navigate = useNavigate()
-  const { login } = useUser()
+  const { login, setOverlayMessage } = useUser()
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
   const [errors, setErrors] = useState({})
+  const [loading, setLoading] = useState(false)
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -33,7 +36,7 @@ function Login() {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const newErrors = {}
 
@@ -51,13 +54,43 @@ function Login() {
 
     setErrors(newErrors)
 
-    if (Object.keys(newErrors).length === 0) {
-      login()
-      toast.success('Login exitoso!', {
-        position: "top-right",
-        autoClose: 3000,
+    if (Object.keys(newErrors).length > 0) return
+
+    setLoading(true)
+    setOverlayMessage('Iniciando sesión')
+    try {
+      const res = await fetch(API_LOGIN_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: formData.email.trim(),
+          password: formData.password
+        })
       })
-      navigate('/')
+      const data = await res.json()
+
+      if (!res.ok) {
+        toast.error(data?.message || 'Error al iniciar sesión')
+        setLoading(false)
+        setOverlayMessage(null)
+        return
+      }
+
+      if (data.token) {
+        login(data.token, data.email ?? formData.email.trim())
+        toast.success('Login exitoso!')
+        navigate('/')
+      } else {
+        toast.error('Respuesta inválida del servidor')
+      }
+    } catch (err) {
+      console.error(err)
+      toast.error('Error de conexión. Intenta de nuevo.')
+    } finally {
+      setLoading(false)
+      setOverlayMessage(null)
     }
   }
 
@@ -103,8 +136,8 @@ function Login() {
                   </Form.Group>
 
                   <div className="d-grid">
-                    <Button variant="primary" type="submit">
-                      Iniciar Sesión
+                    <Button variant="primary" type="submit" disabled={loading}>
+                      {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
                     </Button>
                   </div>
                 </Form>

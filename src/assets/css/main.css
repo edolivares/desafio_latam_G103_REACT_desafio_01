@@ -60,7 +60,25 @@ body {
 }
 
 .price-label {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--color-smoke);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-smoke);
+}
+
+.user-overlay {
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.profile-section-add-icon {
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+
+.profile-info-row-label {
+  min-width: 7rem;
+}
+
+.profile-item-card {
+  background-color: rgba(0, 0, 0, 0.03);
 }
